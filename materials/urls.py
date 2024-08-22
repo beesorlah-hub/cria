@@ -10,6 +10,6 @@ router.register(r'material', MaterialViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('members/', include('members.urls')),
+    path('users/', include('users.urls')),
 
 ]
