@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 # Create your models here.
 
@@ -12,12 +13,14 @@ class Material(models.Model):
     width = models.DecimalField(max_digits=255, decimal_places=2, help_text="Width in mm", default=0.00)
     cost = models.DecimalField(blank=False, null=False, max_digits=8, decimal_places=2, help_text="Cost in #", default=0.00, editable=False)
     vendor = models.CharField(max_length=200, null=False, default=False)
-
-
+    user_type = models.CharField(choices=[('admin', 'Admin'), ('general_user', 'General User')], default='general_user')
+    
 
     def save(self, *args, **kwargs):
         self.cost = self.thickness * self.length * self.width 
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.cost
+        return f"Material: {self.materials} (Cost: {self.cost})"
+    
+
